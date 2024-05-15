@@ -11,7 +11,7 @@
         $tanggal_tenggat_unix = strtotime("+7 day", $tanggal_pinjam_unix);
         $tanggal_tenggat = date("Y-m-d", $tanggal_tenggat_unix);
 
-        $query = "INSERT INTO tbl_peminjaman VALUES (null, '$isbn', '$judul', '$nisn', '$nama', '$tanggal_pinjam', '$tanggal_tenggat', 'keluar')";
+        $query = "INSERT INTO tbl_peminjaman VALUES (null, '$isbn', '$judul', '$nisn', '$nama', '$tanggal_pinjam', '$tanggal_tenggat', 'keluar', null)";
         $sql = mysqli_query($GLOBALS['conn'], $query);
 
         $query = "SELECT tersedia FROM tbl_stok_buku WHERE isbn = '$isbn';";

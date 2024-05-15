@@ -2,16 +2,15 @@
 include '../koneksi.php';
 session_start();
 
-$queryAdmin = "SELECT * FROM tbl_administrator;";
+$queryAdmin = "SELECT * FROM tbl_petugas WHERE role='petugas';";
 $sqlAdmin = mysqli_query($conn, $queryAdmin);
 ?>
 
 <div class="container d-flex align-items-center justify-content-center">
-    <h3>Data Admin</h3>
+    <h3>Data Petugas</h3>
 </div>
-
 <div class="table-responsive">
-    <table id="tbl_Administrator" class="table align-middle table-bordered table-hover" style="width:100%">
+    <table id="tbl_petugas" class="table align-middle table-bordered table-hover" style="width:100%">
         <thead>
             <tr>
                 <th>No</th>
@@ -38,10 +37,10 @@ $sqlAdmin = mysqli_query($conn, $queryAdmin);
                     <td><?php echo $result['tanggal_lahir']; ?></td>
                     <td><?php echo $result['jenis_kelamin'] ?></td>
                     <td><?php echo $result['alamat'] ?></td>
-                    <td><img src="Image/FotoAdmin/<?php echo $result['foto']; ?>" style="width: 100px;"></td>
+                    <td><img src="Image/FotoPetugas/<?php echo $result['foto']; ?>" style="width: 100px;"></td>
                     <td>
-                        <a href="AdministratorSection/ubah.php?nisn=<?php echo $result['kode']; ?>" type="button" class="btn btn-success btn-sm fw-bold"><i class="fa fa-pencil"></i></a>
-                        <a href="AdministratorSection/hapusApi.php?nisn=<?php echo $result['kode']; ?>" type="button" class="btn btn-danger btn-sm fw-bold" onclick="return confirm('Apakah anda yakin ingin menghapus data tersebut???')"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="PetugasSection/ubah.php?kode=<?php echo $result['kode']; ?>" type="button" class="btn btn-success btn-sm fw-bold"><i class="fa fa-pencil"></i></a>
+                        <a href="PetugasSection/hapusApi.php?kode=<?php echo $result['kode']; ?>" type="button" class="btn btn-danger btn-sm fw-bold" onclick="return confirm('Apakah anda yakin ingin menghapus data tersebut???')"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
             <?php
@@ -51,10 +50,10 @@ $sqlAdmin = mysqli_query($conn, $queryAdmin);
     </table>
 </div>
 
-<a href="AdministratorSection/tambah.php" type="button" class="btn btn-primary mb-3 fw-bold"><i class="fa fa-plus"></i>&ensp;Tambah Data</a>
+<a href="petugasSection/tambah.php" type="button" class="btn btn-primary mb-3 fw-bold"><i class="fa fa-plus"></i>&ensp;Tambah Data</a>
 
 <script>
     $(document).ready(function() {
-        $('#tbl_Administrator').DataTable();
+        $('#tbl_petugas').DataTable();
     });
 </script>

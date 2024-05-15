@@ -1,10 +1,13 @@
 <?php
 include '../koneksi.php';
 
-$queryPeminjaman = "SELECT * FROM tbl_peminjaman;";
+$queryPeminjaman = "SELECT * FROM tbl_peminjaman WHERE status = 'keluar';";
 $sqlPeminjaman = mysqli_query($conn, $queryPeminjaman);
 ?>
 
+<div class="container d-flex align-items-center justify-content-center">
+    <h3>Data Peminjaman</h3>
+</div>
 <div class="table-responsive">
     <table id="tbl_peminjaman" class="table align-middle table-bordered table-hover" style="width:100%">
         <thead>

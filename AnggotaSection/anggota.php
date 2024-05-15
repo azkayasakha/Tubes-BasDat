@@ -1,6 +1,5 @@
 <?php
 include '../koneksi.php';
-session_start();
 
 $queryAnggota = "SELECT * FROM tbl_siswa;";
 $sqlAnggota = mysqli_query($conn, $queryAnggota);
@@ -9,7 +8,6 @@ $sqlAnggota = mysqli_query($conn, $queryAnggota);
 <div class="container d-flex align-items-center justify-content-center">
     <h3>Data Anggota</h3>
 </div>
-
 <div class="table-responsive">
     <table id="tbl_anggota" class="table align-middle table-bordered table-hover" style="width:100%">
         <thead>

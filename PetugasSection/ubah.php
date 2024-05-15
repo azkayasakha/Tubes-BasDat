@@ -1,9 +1,7 @@
 <?php
 include '../koneksi.php';
 
-$nisn = $_GET['nisn'];
-
-$query = "SELECT * FROM tbl_siswa WHERE nisn = '$nisn'";
+$query = "SELECT * FROM tbl_petugas WHERE kode = ''";
 $sql = mysqli_query($conn, $query);
 $result = mysqli_fetch_assoc($sql);
 
@@ -12,7 +10,6 @@ $tempat_lahir = $result['tempat_lahir'];
 $tanggal_lahir = $result['tanggal_lahir'];
 $jenis_kelamin = $result['jenis_kelamin'];
 $alamat = $result['alamat'];
-$nama = $result['nama'];
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +20,8 @@ $nama = $result['nama'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <title>Ubah Data Anggota</title>
+    <link rel="stylesheet" href="../show-password-toggle.css">
+    <title>Ubah Data Petugas</title>
 </head>
 
 <body>
@@ -37,29 +35,39 @@ $nama = $result['nama'];
                 </a>
             </nav>
 
-            <h3 class="mt-4 text-center">Ubah Data Anggota</h3>
+            <h3 class="mt-4 text-center">Ubah Data Petugas</h3>
 
             <div class="container mt-4">
                 <form method="POST" action="ubahApi.php" enctype="multipart/form-data">
                     <div class="mb-3 row">
-                        <label for="nisn" class="col-sm-2 col-form-label">NISN</label>
+                        <label for="kode" class="col-sm-2 col-form-label">Kode</label>
                         <div class="col">
-                            <input required type="text" class="form-control" id="nisn" name="nisn"
-                                placeholder="1234567890" value="<?php echo $nisn; ?>">
+                            <input required type="text" class="form-control" id="kode" name="kode"
+                                value="<?php echo $kode; ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="nama" class="col-sm-2 col-form-label">Nama Siswa</label>
+                        <label for="password" class="col-sm-2 col-form-label">Kata Sandi</label>
+                        <div class="col input-group">
+                            <input type="password" id="password" name="password" autocomplete="password"
+                                class="form-control rounded" spellcheck="false" autocorrect="off"
+                                autocapitalize="off" />
+                            <button id="toggle-password" type="button" class="d-none"
+                                aria-label="Show password as plain text. Warning: this will display your password on the screen."></button>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col">
-                            <input required type="text" class="form-control" id="nama" name="nama_siswa"
-                                placeholder="John Doe" value="<?php echo $nama; ?>">
+                            <input required type="text" class="form-control" id="nama" name="nama"
+                                value="<?php echo $nama; ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="tempat_lahir" class="col-sm-2 col-form-label">Tempat Lahir</label>
                         <div class="col">
                             <input required type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
-                                placeholder="Jakarta" value="<?php echo $tempat_lahir; ?>">
+                                value="<?php echo $tempat_lahir; ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -75,7 +83,7 @@ $nama = $result['nama'];
                             <select required id="jenis_kelamin" name="jenis_kelamin" class="form-select">
                                 <option <?php if ($jenis_kelamin == 'Laki-laki') {
                                     echo "selected";
-                                } ?>   value="Laki-laki">
+                                } ?> value="Laki-laki">
                                     Laki-laki</option>
                                 <option <?php if ($jenis_kelamin == 'Perempuan') {
                                     echo "selected";
@@ -92,17 +100,32 @@ $nama = $result['nama'];
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="foto" class="col-sm-2 col-form-label">Foto Siswa</label>
+                        <label for="foto" class="col-sm-2 col-form-label">Foto</label>
                         <div class="col">
                             <input class="form-control" type="file" id="foto" name="foto" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="mb-3 row <?php if ($role !== 'admin') {
+                        echo 'd-none';
+                    } ?>">
+                        <label for="role" class="col-sm-2 col-form-label">Jenis Role</label>
+                        <div class="col">
+                            <select required id="role" name="role" class="form-select">
+                                <option <?php if ($role == 'admin') {
+                                    echo "selected";
+                                } ?> value="admin">Admin</option>
+                                <option <?php if ($role == 'petugas') {
+                                    echo "selected";
+                                } ?> value="petugas">Petugas
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3 row mt-4 text-center">
                         <div class="col">
                             <button type="submit" name="aksi" value="edit" class="btn btn-primary fw-bold"
-                                style="width: 200px;"><i class="fa-solid fa-floppy-disk"></i>&ensp;Simpan
-                                Perubahan</button>
-                            <a href="../index.php" type="button" class="btn btn-danger fw-bold" style="width: 200px;"><i
+                                style="width: 150px;"><i class="fa-solid fa-floppy-disk"></i>&ensp;Simpan</button>
+                            <a href="../index.php" type="button" class="btn btn-danger fw-bold" style="width: 150px;"><i
                                     class="fa fa-reply" aria-hidden="true"></i>&ensp;Batal</a>
                         </div>
                     </div>
@@ -111,6 +134,8 @@ $nama = $result['nama'];
             </div>
         </div>
     </div>
+
+    <script src="../show-password-toggle.js"></script>
 </body>
 
 </html>

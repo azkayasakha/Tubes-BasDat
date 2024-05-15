@@ -8,6 +8,9 @@ $querySum = "SELECT SUM(biaya) AS total_biaya FROM tbl_transaksi;";
 $sqlSum = mysqli_query($conn, $querySum);
 ?>
 
+<div class="container d-flex align-items-center justify-content-center">
+    <h3>Data Transaksi</h3>
+</div>
 <div class="table-responsive">
     <table id="tbl_transaksi" class="table align-middle table-bordered table-hover" style="width:100%">
         <thead>
@@ -49,9 +52,11 @@ $sqlSum = mysqli_query($conn, $querySum);
     </table>
 </div>
 
-<h6 class="mb-3">Total biaya:&emsp;Rp<?php echo number_format(mysqli_fetch_assoc($sqlSum)['total_biaya'], 0, ',', '.') ?></h6>
+<h6 class="mb-3">Total
+    biaya:&emsp;Rp<?php echo number_format(mysqli_fetch_assoc($sqlSum)['total_biaya'], 0, ',', '.') ?></h6>
 
-<a href="AnggotaSection/tambah.php" type="button" class="btn btn-primary mb-3 fw-bold"><i class="fa fa-plus"></i>&ensp;Tambah Data</a>
+<a href="AnggotaSection/tambah.php" type="button" class="btn btn-primary mb-3 fw-bold"><i
+        class="fa fa-plus"></i>&ensp;Tambah Data</a>
 
 <script>
     $(document).ready(function () {

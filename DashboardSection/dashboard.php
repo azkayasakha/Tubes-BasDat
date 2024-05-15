@@ -69,7 +69,6 @@ echo "<script> var daftar_jumlah = $json_daftar_jumlah; </script>";
         <div class="card-body d-flex flex-column justify-content-center align-items-center">
             <h1 class="card-title mb-0.5 mt-0 fs-1"><span class="bg-primary text-white rounded shadow px-2 me-2"><i class="fa-solid fa-book-open-reader"></i></span><span class="text-dark">ePerpus</span></h1>
             <p class="card-text mb-0 mt-0">Sistem Manajemen Perpustakaan Berbasis Web</p>
-            <p class="card-text mb-0 mt-0">00:00:00</p>
         </div>
     </div>
 </div>

@@ -5,6 +5,9 @@ $queryBuku = "SELECT * FROM tbl_buku;";
 $sqlBuku = mysqli_query($conn, $queryBuku);
 ?>
 
+<div class="container d-flex align-items-center justify-content-center">
+    <h3>Data Buku</h3>
+</div>
 <div class="table-responsive">
     <table id="tbl_buku" class="table align-middle table-bordered table-hover" style="width:100%">
         <thead>

@@ -7,17 +7,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input_kode = $_POST["kode_admin"];
     $input_katasandi = $_POST["password"];
 
-    $query = "SELECT * FROM tbl_administrator WHERE kode = '$input_kode';";
+    $query = "SELECT * FROM tbl_petugas WHERE kode = '$input_kode';";
     $sql = mysqli_query($conn, $query);
     if (mysqli_num_rows($sql) > 0) {
         $result = mysqli_fetch_assoc($sql);
         if (password_verify($input_katasandi, $result['kata_sandi'])) {
-            header('location: index.php');
+            $id = time();
+            $queryLogin = "INSERT INTO tbl_login VALUES ($id, $input_kode);";
+            $sqlLogin = mysqli_query($GLOBALS['conn'], $query);
+            header("Location: index.php?id=$id");
         } else {
-            echo 'Kata sandi salah';
+            $error = 'Kata sandi salah!';
         }
     } else {
-        echo "Tidak ada data yang ditemukan!";
+        $error = "Tidak ada data yang ditemukan!";
     }
 }
 ?>
@@ -48,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-
     <div class="main-container">
         <div class="background"></div>
         <div class="content d-flex flex-column justify-content-center align-items-center" style="height: 100vh; ">
@@ -61,22 +63,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h4 class="text-center">Silahkan masuk</h4>
                 <div class="mb-3">
                     <label for="kode_admin" class="form-label">Kode admin</label>
-                    <input required type="text" class="form-control" id="kode_admin" name="kode_admin" value="<?php echo $input_kode; ?>">
+                    <input required type="text" class="form-control" id="kode_admin" name="kode_admin"
+                        value="<?php echo $input_kode; ?>" style="text-transform: uppercase;">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Kata sandi</label>
                     <div class="input-group">
-                        <input required type="password" id="password" name="password" autocomplete="password" class="form-control rounded" spellcheck="false" autocorrect="off" autocapitalize="off" value="<?php echo $input_katasandi; ?>"/>
-                        <button id="toggle-password" type="button" class="d-none" aria-label="Show password as plain text. Warning: this will display your password on the screen."></button>
+                        <input required type="password" id="password" name="password" autocomplete="password"
+                            class="form-control rounded" spellcheck="false" autocorrect="off" autocapitalize="off"
+                            value="<?php echo $input_katasandi; ?>" />
+                        <button id="toggle-password" type="button" class="d-none"
+                            aria-label="Show password as plain text. Warning: this will display your password on the screen."></button>
                     </div>
                 </div>
                 <div class="mb-3 text-center">
-                    <button type="submit" name="aksi" value="login" class="btn btn-primary fw-bold" style="width: 100%;">MASUK</button>
+                    <button type="submit" name="aksi" value="login" class="btn btn-primary fw-bold"
+                        style="width: 100%;">MASUK</button>
+                </div>
+                <div class="<?php if (!isset($error)) {
+                    echo 'd-none';
+                } ?>">
+                    <p class="text-danger"><?php echo $error; ?></p>
                 </div>
             </form>
+
         </div>
     </div>
-
 
     <script src="show-password-toggle.js"></script>
 </body>

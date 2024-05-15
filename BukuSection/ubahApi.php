@@ -17,8 +17,8 @@ function ubah_data($data, $files) {
     } else {
         $split = explode('.', $files['sampul']['name']);
         $ekstensi = $split[count($split) - 1];
-        $sampul = $result['isbn'].'.' . $ekstensi;
-        unlink("../Image/Sampul/".$result['sampul']);
+        $sampul = $result['isbn'] . '.' . $ekstensi;
+        unlink("../Image/Sampul/" . $result['sampul']);
         move_uploaded_file($files['sampul']['tmp_name'], '../Image/Sampul/' . $sampul);
     }
     $query = "UPDATE tbl_buku SET isbn = '$isbn', judul = '$judul', penulis = '$penulis', sinopsis = '$sinopsis', penerbit = '$penerbit', tanggal_terbit = '$tanggal_terbit', sampul = '$sampul' WHERE isbn = '$isbn'";
@@ -35,3 +35,5 @@ if ($_POST['aksi'] == "edit") {
         echo $berhasil;
     }
 }
+
+?>

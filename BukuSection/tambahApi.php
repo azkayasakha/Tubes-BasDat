@@ -21,7 +21,7 @@
         $query = "INSERT INTO tbl_buku VALUES ('$isbn', '$judul', '$penulis', '$sinopsis', '$penerbit', '$tanggal_terbit', '$sampul')";
         $sql = mysqli_query($GLOBALS['conn'], $query);
 
-        $query = "INSERT INTO tbl_stok_buku VALUES ('$isbn', '$judul', '$penulis', '$sampul', '$jumlah_buku', '$tersedia')";
+        $query = "INSERT INTO tbl_stok_buku VALUES ('$isbn', '$jumlah_buku', '$tersedia')";
         $sql = mysqli_query($GLOBALS['conn'], $query);
 
         return true;
