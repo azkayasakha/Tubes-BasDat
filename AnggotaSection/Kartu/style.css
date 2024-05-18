@@ -1,0 +1,10 @@
+.kartu-anggota {
+    width: 86mm;
+    height: 54mm;
+    border: 1px solid #000;
+    border-radius: 15px;
+}
+
+p {
+    size: 5pt;
+}

@@ -1,5 +1,6 @@
 <?php
     include '../koneksi.php';
+    include '../loginKey.php';
     function tambah_data($data, $files) {
         $isbn = $data['isbn'];
         $judul = $data['judul'];
@@ -30,7 +31,7 @@
     if ($_POST['aksi'] == "add") {
         $berhasil = tambah_data($_POST, $_FILES);
         if ($berhasil) {
-            header("location: ../index.php");
+            header("location: ../index.php?login=$login");
         } else {
             echo $berhasil;
         }

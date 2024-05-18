@@ -1,5 +1,6 @@
 <?php
 include '../koneksi.php';
+include '../loginKey.php';
 
 $isbn = $_GET['isbn'];
 
@@ -92,7 +93,7 @@ $tanggal_terbit = $result['tanggal_terbit'];
                         <div class="col">
                             <button type="submit" name="aksi" value="edit" class="btn btn-primary fw-bold"
                                 style="width: 150px;"><i class="fa-solid fa-floppy-disk"></i>&ensp;Simpan</button>
-                            <a href="../index.php" type="button" class="btn btn-danger fw-bold" style="width: 150px;"><i
+                            <a href="../index.php?login=<?php echo $login ?>" type="button" class="btn btn-danger fw-bold" style="width: 150px;"><i
                                     class="fa fa-reply" aria-hidden="true"></i>&ensp;Batal</a>
                         </div>
                     </div>

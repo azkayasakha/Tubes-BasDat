@@ -1,5 +1,6 @@
 <?php
 include '../koneksi.php';
+include '../loginKey.php';
 
 function hapus($data)
 {
@@ -8,7 +9,7 @@ function hapus($data)
     $query = "SELECT * FROM tbl_peminjaman WHERE id_peminjaman = '$id_peminjaman';";
     $sql = mysqli_query($GLOBALS['conn'], $query);
     $result = mysqli_fetch_assoc($sql);
-    
+
     $isbn_result = $result['isbn'];
     $nisn_result = $result['nisn'];
     $nama_result = $result['nama'];
@@ -43,7 +44,7 @@ if (isset($_GET['id_peminjaman'])) {
     $berhasil = hapus($_GET);
     if ($berhasil) {
         // $_SESSION['eksekusi'] = "Data Berhasil Dihapus!";
-        header("location: ../index.php");
+        header("location: ../index.php?login=$login");
         echo $berhasil;
     } else {
         echo $berhasil;

@@ -1,7 +1,20 @@
 <?php
 include '../koneksi.php';
+include '../loginKey.php';
 
-$query = "SELECT * FROM tbl_petugas WHERE kode = ''";
+$getKode = $_GET['kode'];
+$kode = [];
+for ($i = 0; $i < strlen($getKode); $i += 3) {
+    $kode[] = substr($getKode, $i, 3);
+}
+$kodeAdm = $kode[0];
+$kodePtg = $kode[1];
+
+$query = "SELECT * FROM tbl_petugas WHERE kode = '$kodeAdm'";
+$sql = mysqli_query($conn, $query);
+$role = mysqli_fetch_assoc($sql)['role'];
+
+$query = "SELECT * FROM tbl_petugas WHERE kode = '$kodePtg'";
 $sql = mysqli_query($conn, $query);
 $result = mysqli_fetch_assoc($sql);
 
@@ -10,6 +23,7 @@ $tempat_lahir = $result['tempat_lahir'];
 $tanggal_lahir = $result['tanggal_lahir'];
 $jenis_kelamin = $result['jenis_kelamin'];
 $alamat = $result['alamat'];
+$rolePtg = $result['role'];
 ?>
 
 <!DOCTYPE html>
@@ -39,11 +53,11 @@ $alamat = $result['alamat'];
 
             <div class="container mt-4">
                 <form method="POST" action="ubahApi.php" enctype="multipart/form-data">
-                    <div class="mb-3 row">
+                    <div class="mb-3 row <?php if ($role !== 'admin') { echo 'd-none'; } ?>">
                         <label for="kode" class="col-sm-2 col-form-label">Kode</label>
                         <div class="col">
                             <input required type="text" class="form-control" id="kode" name="kode"
-                                value="<?php echo $kode; ?>">
+                                value="<?php echo $kodePtg; ?>" style="text-transform: uppercase;">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -105,16 +119,14 @@ $alamat = $result['alamat'];
                             <input class="form-control" type="file" id="foto" name="foto" accept="image/*">
                         </div>
                     </div>
-                    <div class="mb-3 row <?php if ($role !== 'admin') {
-                        echo 'd-none';
-                    } ?>">
+                    <div class="mb-3 row <?php if ($role !== 'admin') { echo 'd-none'; } ?>">
                         <label for="role" class="col-sm-2 col-form-label">Jenis Role</label>
                         <div class="col">
                             <select required id="role" name="role" class="form-select">
-                                <option <?php if ($role == 'admin') {
+                                <option <?php if ($rolePtg == 'admin') {
                                     echo "selected";
                                 } ?> value="admin">Admin</option>
-                                <option <?php if ($role == 'petugas') {
+                                <option <?php if ($rolePtg == 'petugas') {
                                     echo "selected";
                                 } ?> value="petugas">Petugas
                                 </option>
@@ -125,7 +137,7 @@ $alamat = $result['alamat'];
                         <div class="col">
                             <button type="submit" name="aksi" value="edit" class="btn btn-primary fw-bold"
                                 style="width: 150px;"><i class="fa-solid fa-floppy-disk"></i>&ensp;Simpan</button>
-                            <a href="../index.php" type="button" class="btn btn-danger fw-bold" style="width: 150px;"><i
+                            <a href="../index.php?login=<?php echo $login; ?>" type="button" class="btn btn-danger fw-bold" style="width: 150px;"><i
                                     class="fa fa-reply" aria-hidden="true"></i>&ensp;Batal</a>
                         </div>
                     </div>

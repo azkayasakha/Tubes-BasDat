@@ -1,9 +1,21 @@
 <?php
 include 'koneksi.php';
 
-$query = "SELECT * FROM tbl_petugas WHERE kode = ''";
+$login = $_GET['login'];
+$query = "SELECT * FROM tbl_login WHERE id = '$login'";
 $sql = mysqli_query($conn, $query);
-$result = mysqli_fetch_assoc($sql);
+if (mysqli_num_rows($sql) == 0) {
+    header("Location: login.php");
+} else {
+    $result = mysqli_fetch_assoc($sql);
+    $kode = $result["kode"];
+
+    $query = "SELECT * FROM tbl_petugas WHERE kode = '$kode'";
+    $sql = mysqli_query($conn, $query);
+    $result = mysqli_fetch_assoc($sql);
+
+    $role = $result['role'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +55,7 @@ $result = mysqli_fetch_assoc($sql);
                             class="fa-solid fa-wallet"></i>&emsp;<b>Transaksi</b></a></li>
                 <li class=""><a href="#anggota" class="text-decoration-none px-3 py-2 d-block"><i
                             class="fa-solid fa-user-group"></i>&emsp;<b>Anggota</b></a></li>
-                <li class="<?php if ($_SESSION["role"] !== 'admin') {
+                <li class="<?php if ($role !== 'admin') {
                     echo 'd-none';
                 } ?>"><a href="#petugas" class="text-decoration-none px-3 py-2 d-block"><i
                             class="fa-solid fa-user-gear"></i>&emsp;<b>Petugas</b></a></li>
@@ -87,10 +99,8 @@ $result = mysqli_fetch_assoc($sql);
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li><a class="dropdown-item"
-                                                href="PetugasSection/ubah.php?kode=<?php echo $petugas; ?>">Ubah
-                                                Akun</a></li>
-                                        <li><a class="dropdown-item" href="<?php session_unset();
-                                        session_destroy(); ?>">Keluar</a></li>
+                                                href="PetugasSection/ubah.php?kode=<?php echo $kode.$kode; ?>">Ubah Akun</a></li>
+                                        <li><a class="dropdown-item" href="login.php">Keluar</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -106,7 +116,10 @@ $result = mysqli_fetch_assoc($sql);
             <section id="buku" class="content-fill px-4 pt-4"></section>
             <section id="transaksi" class="content-fill px-4 pt-4"></section>
             <section id="anggota" class="content-fill px-4 pt-4"></section>
-            <section id="petugas" class="content-fill px-4 pt-4"></section>
+            <section id="petugas" class="<?php if ($role !== 'admin') {
+                echo 'd-none';
+            } ?> content-fill px-4 pt-4">
+            </section>
         </div>
     </div>
 

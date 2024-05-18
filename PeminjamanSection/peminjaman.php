@@ -1,7 +1,7 @@
 <?php
 include '../koneksi.php';
 
-$queryPeminjaman = "SELECT * FROM tbl_peminjaman WHERE status = 'keluar';";
+$queryPeminjaman = "SELECT tbl_peminjaman.id_peminjaman, tbl_peminjaman.isbn, tbl_peminjaman.nisn, tbl_peminjaman.tanggal_pinjam, tbl_peminjaman.tanggal_tenggat, tbl_buku.judul, tbl_siswa.nama FROM tbl_peminjaman INNER JOIN tbl_buku ON tbl_peminjaman.isbn=tbl_buku.isbn INNER JOIN tbl_siswa ON tbl_peminjaman.nisn=tbl_siswa.nisn WHERE status='keluar'";
 $sqlPeminjaman = mysqli_query($conn, $queryPeminjaman);
 ?>
 

@@ -2,22 +2,24 @@
     include '../koneksi.php';
     include '../loginKey.php';
     function tambah_data($data, $files) {
-        $nisn = $data['nisn'];
-        $nama_siswa = $data['nama_siswa'];
+        $kode = $data['kode'];
+        $kata_sandi = password_hash($data['kata_sandi'], PASSWORD_DEFAULT);
+        $nama = $data['nama'];
         $tempat_lahir = $data['tempat_lahir'];
         $tanggal_lahir = $data['tanggal_lahir'];
         $jenis_kelamin = $data['jenis_kelamin'];
         $alamat = $data['alamat'];
+        $role = $data['role'];
 
         $split = explode('.', $files['foto']['name']);
         $ekstensi = $split[count($split) - 1];
-        $foto = $nisn.'.'.$ekstensi;
+        $foto = $kode.'.'.$ekstensi;
 
-        $dir = "../Image/FotoSiswa/";
+        $dir = "../Image/FotoPetugas/";
         $tmpFile = $files['foto']['tmp_name'];
         move_uploaded_file($tmpFile, $dir.$foto);
 
-        $query = "INSERT INTO tbl_siswa VALUES ('$nisn', '$nama_siswa', '$tempat_lahir', '$tanggal_lahir', '$jenis_kelamin', '$alamat', '$foto')";
+        $query = "INSERT INTO tbl_petugas VALUES ('$kode', '$kata_sandi', '$nama', '$tempat_lahir', '$tanggal_lahir', '$jenis_kelamin', '$alamat', '$foto', '$role')";
         $sql = mysqli_query($GLOBALS['conn'], $query);
 
         return true;

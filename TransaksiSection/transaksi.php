@@ -1,7 +1,7 @@
 <?php
 include '../koneksi.php';
 
-$queryTransaksi = "SELECT * FROM tbl_transaksi;";
+$queryTransaksi = "SELECT tbl_transaksi.id_transaksi, tbl_transaksi.id_peminjaman, tbl_transaksi.nisn, tbl_transaksi.tanggal, tbl_transaksi.biaya, tbl_transaksi.keterangan, tbl_siswa.nama FROM tbl_transaksi INNER JOIN tbl_siswa ON tbl_transaksi.nisn=tbl_siswa.nisn;";
 $sqlTransaksi = mysqli_query($conn, $queryTransaksi);
 
 $querySum = "SELECT SUM(biaya) AS total_biaya FROM tbl_transaksi;";
@@ -37,12 +37,8 @@ $sqlSum = mysqli_query($conn, $querySum);
                     <td><?php echo $result['biaya']; ?></td>
                     <td><?php echo $result['keterangan']; ?></td>
                     <td>
-                        <a href="kelola.php?ubah=<?php echo $result['id_transaksi']; ?>" type="button"
-                            class="btn btn-success btn-sm fw-bold"><i class="fa-solid fa-pencil"></i></a>
-                        <a href="proses.php?hapus=<?php echo $result['id_transaksi']; ?>" type="button"
-                            class="btn btn-danger btn-sm fw-bold"
-                            onclick="return confirm('Apakah anda yakin ingin menghapus data tersebut???')"><i
-                                class="fa-solid fa-trash-can"></i></a>
+                        <a href="TransaksiSection/ubah.php?id=<?php echo $result['id_transaksi']; ?>" type="button" class="btn btn-success btn-sm fw-bold"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="TransaksiSection/hapusApi.php?id=<?php echo $result['id_transaksi']; ?>" type="button" class="btn btn-danger btn-sm fw-bold" onclick="return confirm('Apakah anda yakin ingin menghapus data tersebut???')"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
                 <?php
@@ -51,13 +47,8 @@ $sqlSum = mysqli_query($conn, $querySum);
         </tbody>
     </table>
 </div>
-
-<h6 class="mb-3">Total
-    biaya:&emsp;Rp<?php echo number_format(mysqli_fetch_assoc($sqlSum)['total_biaya'], 0, ',', '.') ?></h6>
-
-<a href="AnggotaSection/tambah.php" type="button" class="btn btn-primary mb-3 fw-bold"><i
-        class="fa fa-plus"></i>&ensp;Tambah Data</a>
-
+<h6 class="mb-3">Total biaya:&emsp;Rp<?php echo number_format(mysqli_fetch_assoc($sqlSum)['total_biaya'], 0, ',', '.') ?></h6>
+<a href="TransaksiSection/tambah.php" type="button" class="btn btn-primary mb-3 fw-bold"><i class="fa fa-plus"></i>&ensp;Tambah Data</a>
 <script>
     $(document).ready(function () {
         $('#tbl_transaksi').DataTable();

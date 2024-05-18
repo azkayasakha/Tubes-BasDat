@@ -2,6 +2,10 @@
 include '../koneksi.php';
 include '../loginKey.php';
 
+$getId = $_GET['id'];
+
+$query = "SELECT ";
+
 $querySiswa = "SELECT nisn FROM tbl_siswa ORDER BY nisn ASC";
 $sqlSiswa = mysqli_query($conn, $querySiswa);
 $dataSiswa = array();

@@ -1,5 +1,6 @@
 <?php
 include '../koneksi.php';
+include '../loginKey.php';
 
 $queryBuku = "SELECT isbn FROM tbl_buku ORDER BY isbn ASC";
 $sqlBuku = mysqli_query($conn, $queryBuku);
@@ -86,7 +87,7 @@ $searchSiswa = mysqli_fetch_assoc($sqlSearchSiswa)
                             <button type="submit" name="aksi" value="add" class="btn btn-primary fw-bold"
                                 style="width: 150px;"><i class="fa-solid fa-magnifying-glass"></i>&ensp;Cek
                                 Data</button>
-                            <a href="../index.php" type="button" class="btn btn-danger fw-bold" style="width: 150px;"><i
+                            <a href="../index.php?login=<?php echo $login; ?>" type="button" class="btn btn-danger fw-bold" style="width: 150px;"><i
                                     class="fa fa-reply" aria-hidden="true"></i>&ensp;Batal</a>
                         </div>
                     </div>
@@ -148,7 +149,7 @@ $searchSiswa = mysqli_fetch_assoc($sqlSearchSiswa)
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="autocomplete.js"></script>
+    <script src="../Script/autocomplete.js"></script>
     <script>
         var auto_complete_isbn = new Autocomplete(document.getElementById('isbn'), {
             data: <?php echo json_encode($dataBuku); ?>,

@@ -1,6 +1,6 @@
 <?php
 include '../koneksi.php';
-$queryPeminjaman = "SELECT * FROM tbl_peminjaman;";
+$queryPeminjaman = "SELECT tbl_peminjaman.isbn, tbl_peminjaman.nisn, tbl_peminjaman.tanggal_pinjam, tbl_peminjaman.tanggal_tenggat, tbl_peminjaman.tanggal_kembali, tbl_peminjaman.status, tbl_buku.judul, tbl_siswa.nama FROM tbl_peminjaman INNER JOIN tbl_buku ON tbl_peminjaman.isbn=tbl_buku.isbn INNER JOIN tbl_siswa ON tbl_peminjaman.nisn=tbl_siswa.nisn;";
 $sqlPeminjaman = mysqli_query($conn, $queryPeminjaman);
 ?>
 

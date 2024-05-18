@@ -1,26 +1,29 @@
 <?php
 include 'koneksi.php';
 
-$input_kode = "";
-$input_katasandi = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $input_kode = $_POST["kode_admin"];
-    $input_katasandi = $_POST["password"];
+$query = "DELETE FROM tbl_login;";
+$sql = mysqli_query($conn, $query);
+
+$input_kode = '';
+$input_katasandi = '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $input_kode = strtoupper($_POST['kode_admin']);
+    $input_katasandi = $_POST['password'];
 
     $query = "SELECT * FROM tbl_petugas WHERE kode = '$input_kode';";
     $sql = mysqli_query($conn, $query);
     if (mysqli_num_rows($sql) > 0) {
         $result = mysqli_fetch_assoc($sql);
         if (password_verify($input_katasandi, $result['kata_sandi'])) {
-            $id = time();
-            $queryLogin = "INSERT INTO tbl_login VALUES ($id, $input_kode);";
-            $sqlLogin = mysqli_query($GLOBALS['conn'], $query);
-            header("Location: index.php?id=$id");
+            $login = time();
+            $query = "INSERT INTO tbl_login VALUES ('$login', '$input_kode')";
+            $sql = mysqli_query($conn, $query);
+            header("Location: index.php?login=$login");
         } else {
             $error = 'Kata sandi salah!';
         }
     } else {
-        $error = "Tidak ada data yang ditemukan!";
+        $error = 'Tidak ada data yang ditemukan!';
     }
 }
 ?>
@@ -41,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             position: absolute;
             height: 100%;
             width: 100%;
-            background-image: url("https://t3.ftcdn.net/jpg/03/12/98/48/360_F_312984875_Lnvr7ACXrZKkaeghLneFWSCW68BLDOTP.jpg");
+            background-image: url("Book.jpg");
             background-size: cover;
             background-position: center;
             filter: blur(5px);
@@ -58,8 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         class="fa-solid fa-book-open-reader"></i></span><span class="text-white">ePerpus</span></h1>
             <p class="text-white text-center mb-4">Sistem Manajemen Perpustakaan Berbasis Web</p>
 
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
-                class="card p-4 shadow-sm" style="width: 352px;">
+            <form method="POST" action="" class="card p-4 shadow-sm" style="width: 352px;">
                 <h4 class="text-center">Silahkan masuk</h4>
                 <div class="mb-3">
                     <label for="kode_admin" class="form-label">Kode admin</label>

@@ -1,5 +1,7 @@
 <?php
 include '../koneksi.php';
+include '../loginKey.php';
+
 function ubah_data($data) {
     $isbn = $data['isbn'];
     $jumlah_buku = $data['jumlah_buku'];
@@ -19,7 +21,7 @@ function ubah_data($data) {
 if ($_POST['aksi'] == "edit") {
     $berhasil = ubah_data($_POST);
     if ($berhasil) {
-        header("location: ../index.php");
+        header("location: ../index.php?login=$login");
     } else {
         echo $berhasil;
     }
