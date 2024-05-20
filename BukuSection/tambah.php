@@ -1,3 +1,7 @@
+<?php
+include '../loginKey.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +16,9 @@
 <body>
     <div class="main-container">
         <div class="content">
-            <nav class="navbar navbar-dark bg-dark justify-content-center">
-                <a class="navbar-brand" href="../index.php">
-                    <h1 class="fs-4"><span class="bg-white text-dark rounded shadow px-2 me-2"><i class="fa-solid fa-book-open-reader"></i></span> <span class="text-white">ePerpus</span></h1>
+            <nav class="navbar navbar-dark justify-content-center" style="background-color: #3D8BFD;">
+                <a class="navbar-brand" href="../index.php?login=<?php echo $login ?>">
+                    <h1 class="fs-4 m-0"><span class="bg-white text-primary rounded shadow px-2 me-2"><i class="fa-solid fa-book-open-reader"></i></span> <span class="text-white">ePerpus</span></h1>
                 </a>
             </nav>
 
@@ -73,7 +77,7 @@
                     <div class="mb-3 row mt-4 text-center">
                         <div class="col">
                             <button type="submit" name="aksi" value="add" class="btn btn-primary fw-bold" style="width: 150px;"><i class="fa-solid fa-floppy-disk"></i>&ensp;Tambahkan</button>
-                            <a href="../index.php" type="button" class="btn btn-danger fw-bold" style="width: 150px;"><i class="fa fa-reply" aria-hidden="true"></i>&ensp;Batal</a>
+                            <a href="../index.php?login<?php echo $login ?>" type="button" class="btn btn-danger fw-bold" style="width: 150px;"><i class="fa fa-reply" aria-hidden="true"></i>&ensp;Batal</a>
                         </div>
                     </div>
 

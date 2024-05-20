@@ -1,7 +1,7 @@
 <?php
 include '../koneksi.php';
 
-$queryPeminjaman = "SELECT tbl_peminjaman.id_peminjaman, tbl_peminjaman.isbn, tbl_peminjaman.nisn, tbl_peminjaman.tanggal_pinjam, tbl_peminjaman.tanggal_tenggat, tbl_buku.judul, tbl_siswa.nama FROM tbl_peminjaman INNER JOIN tbl_buku ON tbl_peminjaman.isbn=tbl_buku.isbn INNER JOIN tbl_siswa ON tbl_peminjaman.nisn=tbl_siswa.nisn WHERE status='keluar'";
+$queryPeminjaman = "SELECT * FROM tbl_peminjaman WHERE status='keluar'";
 $sqlPeminjaman = mysqli_query($conn, $queryPeminjaman);
 ?>
 
@@ -13,6 +13,7 @@ $sqlPeminjaman = mysqli_query($conn, $queryPeminjaman);
         <thead>
             <tr>
                 <th>No</th>
+                <th>Petugas</th>
                 <th>ISBN</th>
                 <th>Judul</th>
                 <th>NISN</th>
@@ -30,6 +31,7 @@ $sqlPeminjaman = mysqli_query($conn, $queryPeminjaman);
             ?>
                 <tr>
                     <td><?php echo ++$no; ?></td>
+                    <td><?php echo $result['kode']; ?></td>
                     <td><?php echo $result['isbn']; ?></td>
                     <td><?php echo $result['judul']; ?></td>
                     <td><?php echo $result['nisn']; ?></td>

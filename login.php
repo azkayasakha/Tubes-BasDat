@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             class="form-control rounded" spellcheck="false" autocorrect="off" autocapitalize="off"
                             value="<?php echo $input_katasandi; ?>" />
                         <button id="toggle-password" type="button" class="d-none"
-                            aria-label="Show password as plain text. Warning: this will display your password on the screen."></button>
+                            aria-label="Show password as plain text. Warning: this will display your password on the screen." style="right: 4px;"></button>
                     </div>
                 </div>
                 <div class="mb-3 text-center">
@@ -92,7 +92,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 
-    <script src="show-password-toggle.js"></script>
+    <script src="Script/show-password-toggle.js"></script>
+    <script>
+        localStorage.removeItem('lastActiveContent');
+    </script>
+
 </body>
 
 </html>

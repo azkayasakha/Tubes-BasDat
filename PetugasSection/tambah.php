@@ -13,11 +13,9 @@
 <body>
     <div class="main-container">
         <div class="content">
-            <nav class="navbar navbar-dark bg-dark justify-content-center">
-                <a class="navbar-brand" href="../index.php">
-                    <h1 class="fs-4"><span class="bg-white text-dark rounded shadow px-2 me-2"><i
-                                class="fa-solid fa-book-open-reader"></i></span> <span class="text-white">ePerpus</span>
-                    </h1>
+            <nav class="navbar navbar-dark justify-content-center" style="background-color: #3D8BFD;">
+                <a class="navbar-brand" href="../index.php?login=<?php echo $login ?>">
+                    <h1 class="fs-4 m-0"><span class="bg-white text-primary rounded shadow px-2 me-2"><i class="fa-solid fa-book-open-reader"></i></span> <span class="text-white">ePerpus</span></h1>
                 </a>
             </nav>
 
@@ -104,7 +102,7 @@
             </div>
         </div>
     </div>
-    <script src="../show-password-toggle.js"></script>
+    <script src="../Script/show-password-toggle.js"></script>
 </body>
 
 </html>

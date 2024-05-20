@@ -2,8 +2,11 @@
 include '../koneksi.php';
 include '../loginKey.php';
 
-function hapus($data)
-{
+function hapus($data){
+    $query = "SELECT * FROM tbl_pengaturan";
+    $sql = mysqli_query($GLOBALS['conn'], $query);
+    $resultPengaturan = mysqli_fetch_assoc($sql);
+
     $id_peminjaman = $data['id_peminjaman'];
 
     $query = "SELECT * FROM tbl_peminjaman WHERE id_peminjaman = '$id_peminjaman';";
@@ -20,9 +23,9 @@ function hapus($data)
     $selisih_hari = ceil(($tanggal_tenggat - $tanggal_hari_ini) / (60 * 60 * 24));
     if ($selisih_hari < 0) {
         $terlambat = $selisih_hari * -1;
-        $denda = $terlambat * 1000;
+        $denda = $terlambat * $resultPengaturan['denda'];
 
-        $query = "INSERT INTO tbl_transaksi VALUES (null, '$id_peminjaman', '$nisn_result', '$nama_result', '$tanggal', '$denda', 'Keterlambatan')";
+        $query = "INSERT INTO tbl_transaksi VALUES (null, '$id_peminjaman', '$nisn_result', '$tanggal', '$denda', 'Keterlambatan')";
         $sql = mysqli_query($GLOBALS['conn'], $query);
     }
 

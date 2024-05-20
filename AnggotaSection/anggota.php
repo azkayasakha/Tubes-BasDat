@@ -36,11 +36,13 @@ $sqlAnggota = mysqli_query($conn, $queryAnggota);
                     <td><?php echo $result['tanggal_lahir']; ?></td>
                     <td><?php echo $result['jenis_kelamin'] ?></td>
                     <td><?php echo $result['alamat'] ?></td>
-                    <td><img src="Image/FotoSiswa/<?php echo $result['foto']; ?>" style="width: 100px;"></td>
+                    <td><img src="Image/FotoSiswa/<?php echo $result['foto']; ?>" height="96px" width="64px"></td>
                     <td>
-                        <a href="AnggotaSection/Kartu/kartu.php?nisn=<?php echo $result['nisn']; ?>" target="_blank" type="button" class="btn btn-primary btn-sm fw-bold"><i class="fa-solid fa-print"></i></a>
-                        <a href="AnggotaSection/ubah.php?nisn=<?php echo $result['nisn']; ?>" type="button" class="btn btn-success btn-sm fw-bold"><i class="fa fa-pencil"></i></a>
-                        <a href="AnggotaSection/hapusApi.php?nisn=<?php echo $result['nisn']; ?>" type="button" class="btn btn-danger btn-sm fw-bold" onclick="return confirm('Apakah anda yakin ingin menghapus data tersebut???')"><i class="fa-solid fa-trash-can"></i></a>
+                        <div class="d-flex gap-2">
+                            <a href="AnggotaSection/Kartu/kartu.php?nisn=<?php echo $result['nisn']; ?>" target="_blank" type="button" class="btn btn-primary btn-sm fw-bold"><i class="fa-solid fa-print"></i></a>
+                            <a href="AnggotaSection/ubah.php?nisn=<?php echo $result['nisn']; ?>" type="button" class="btn btn-success btn-sm fw-bold"><i class="fa fa-pencil"></i></a>
+                            <a href="AnggotaSection/hapusApi.php?nisn=<?php echo $result['nisn']; ?>" type="button" class="btn btn-danger btn-sm fw-bold" onclick="return confirm('Apakah anda yakin ingin menghapus data tersebut???')"><i class="fa-solid fa-trash-can"></i></a>
+                        </div>
                     </td>
                 </tr>
             <?php

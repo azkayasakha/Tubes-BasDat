@@ -4,14 +4,17 @@ include '../loginKey.php';
 
 function tambah_data($data) {
     $isbn = $data['isbn'];
+    $judul = $data['judul'];
     $nisn = $data['nisn'];
+    $nama = $data['nama'];
 
     $tanggal_pinjam = date("Y-m-d");
     $tanggal_pinjam_unix = strtotime($tanggal_pinjam);
     $tanggal_tenggat_unix = strtotime("+7 day", $tanggal_pinjam_unix);
     $tanggal_tenggat = date("Y-m-d", $tanggal_tenggat_unix);
 
-    $query = "INSERT INTO tbl_peminjaman VALUES (null, '$isbn', '$nisn', '$tanggal_pinjam', '$tanggal_tenggat', 'keluar', null)";
+    $loginKode = $GLOBALS['loginKode'];
+    $query = "INSERT INTO tbl_peminjaman VALUES (null, '$loginKode', '$isbn', '$judul', '$nisn', '$nama', '$tanggal_pinjam', '$tanggal_tenggat', null, 'keluar')";
     $sql = mysqli_query($GLOBALS['conn'], $query);
 
     $query = "SELECT tersedia FROM tbl_stok_buku WHERE isbn = '$isbn';";

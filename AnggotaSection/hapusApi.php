@@ -1,5 +1,6 @@
 <?php
     include '../koneksi.php';
+    include '../loginKey.php';
 
     function hapus($data) {
         $nisn = $data['nisn'];
@@ -19,9 +20,7 @@
     if (isset($_GET['nisn'])) {
         $berhasil = hapus($_GET);
         if ($berhasil) {
-            // $_SESSION['eksekusi'] = "Data Berhasil Dihapus!";
-            header("location: ../index.php");
-            echo $berhasil;
+            header("location: ../index.php?login=$login");
         } else {
             echo $berhasil;
         }

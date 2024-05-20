@@ -6,7 +6,7 @@ function ubah_data($data) {
     $isbn = $data['isbn'];
     $jumlah_buku = $data['jumlah_buku'];
 
-    $query =  "SELECT COUNT(isbn) AS jumlah_isbn FROM tbl_peminjaman WHERE isbn = '$isbn';";
+    $query =  "SELECT COUNT(isbn) AS jumlah_isbn FROM tbl_peminjaman WHERE isbn = '$isbn' AND status = 'keluar';";
     $sql = mysqli_query($GLOBALS['conn'], $query);
     $jumlah_isbn = mysqli_fetch_assoc($sql)['jumlah_isbn'];
 

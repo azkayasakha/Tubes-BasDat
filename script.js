@@ -3,7 +3,7 @@ $(document).ready(function() {
     var lastActiveContent = localStorage.getItem('lastActiveContent');
 
     // Sembunyikan semua konten kecuali konten yang sedang aktif
-    $('#dashboard, #peminjaman, #riwayat, #stok_buku, #buku, #transaksi, #anggota, #petugas').not(lastActiveContent).hide();
+    $('#dashboard, #peminjaman, #riwayat, #stok_buku, #buku, #transaksi, #anggota, #petugas, #pengaturan').not(lastActiveContent).hide();
 
     // Jika ada konten yang disimpan, tampilkan konten tersebut
     if (lastActiveContent) {
@@ -31,7 +31,7 @@ $(document).ready(function() {
         localStorage.setItem('lastActiveContent', targetContentId);
 
         // Menampilkan konten yang sesuai dan menyembunyikan yang lainnya
-        $('#dashboard, #peminjaman, #riwayat, #stok_buku, #buku, #transaksi, #anggota, #petugas').not(targetContentId).hide();
+        $('#dashboard, #peminjaman, #riwayat, #stok_buku, #buku, #transaksi, #anggota, #petugas, #pengaturan').not(targetContentId).hide();
         $(targetContentId).show();
     });
 
@@ -97,3 +97,4 @@ includeHTML("buku", "BukuSection/buku");
 includeHTML("transaksi", "TransaksiSection/transaksi");
 includeHTML("anggota", "AnggotaSection/anggota");
 includeHTML("petugas", "PetugasSection/petugas");
+includeHTML("pengaturan", "PengaturanSection/pengaturan");

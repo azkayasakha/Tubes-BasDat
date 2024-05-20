@@ -55,19 +55,14 @@ if (mysqli_num_rows($sql) == 0) {
                             class="fa-solid fa-wallet"></i>&emsp;<b>Transaksi</b></a></li>
                 <li class=""><a href="#anggota" class="text-decoration-none px-3 py-2 d-block"><i
                             class="fa-solid fa-user-group"></i>&emsp;<b>Anggota</b></a></li>
-                <li class="<?php if ($role !== 'admin') {
-                    echo 'd-none';
-                } ?>"><a href="#petugas" class="text-decoration-none px-3 py-2 d-block"><i
-                            class="fa-solid fa-user-gear"></i>&emsp;<b>Petugas</b></a></li>
+                <li class="<?php if ($role !== 'admin') { echo 'd-none'; } ?>"><a href="#petugas" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user-tie"></i>&emsp;<b>Petugas</b></a></li>
+                <li class="<?php if ($role !== 'admin') { echo 'd-none'; } ?>"><a href="#pengaturan" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-gear"></i>&emsp;<b>Pengaturan</b></a></li>
                 <!-- <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between"><span><i class="fal fa-comment"></i> Messages</span><span class="bg-dark rounded-pill text-white py-0 px-2">02</span></a></li> -->
             </ul>
-            <hr class="h-color mx-2">
+            <!-- <hr class="h-color mx-2">
             <ul class="list-unstyled px-2">
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i
-                            class="fal fa-bars"></i>Settings</a></li>
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i
-                            class="fal fa-bell"></i>Notifications</a></li>
-            </ul>
+                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-gear"></i>&emsp;<b>Settings</b></a></li>
+            </ul> -->
         </div>
 
         <div class="content">
@@ -116,10 +111,8 @@ if (mysqli_num_rows($sql) == 0) {
             <section id="buku" class="content-fill px-4 pt-4"></section>
             <section id="transaksi" class="content-fill px-4 pt-4"></section>
             <section id="anggota" class="content-fill px-4 pt-4"></section>
-            <section id="petugas" class="<?php if ($role !== 'admin') {
-                echo 'd-none';
-            } ?> content-fill px-4 pt-4">
-            </section>
+            <section id="petugas" class="<?php if ($role !== 'admin') { echo 'd-none'; } ?> content-fill px-4 pt-4"> </section>
+            <section id="pengaturan" class="<?php if ($role !== 'admin') { echo 'd-none'; } ?> content-fill px-4 pt-4"> </section>
         </div>
     </div>
 

@@ -5,7 +5,7 @@ $query = "SELECT SUM(tersedia) AS jumlah_buku FROM tbl_stok_buku;";
 $sql = mysqli_query($conn, $query);
 $jumlah_buku = mysqli_fetch_assoc($sql)['jumlah_buku'];
 
-$query = "SELECT COUNT(id_peminjaman) AS jumlah_peminjaman FROM tbl_peminjaman";
+$query = "SELECT COUNT(id_peminjaman) AS jumlah_peminjaman FROM tbl_peminjaman WHERE status = 'keluar'";
 $sql = mysqli_query($conn, $query);
 $jumlah_peminjaman = mysqli_fetch_assoc($sql)['jumlah_peminjaman'];
 
